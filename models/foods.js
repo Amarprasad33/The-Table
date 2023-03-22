@@ -6,7 +6,8 @@ const FoodSchema = new Schema({
     price: Number,
     category: String,
     avaliable: Boolean,
-    description: String
+    description: String,
+    image: String
 })
 
 module.exports = mongoose.model('Food', FoodSchema);
