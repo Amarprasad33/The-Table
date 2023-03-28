@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 
 const app = express();
 const Food = require('./models/foods');
+const morgan = require('morgan');
+const routes = require('./routes/api');
+const cors = require('cors');
 
 
 
@@ -25,6 +28,14 @@ db.once("open", () => {
 // food1.save()
 //     .then(() => console.log('Saved ...Yummy'))
 //     .catch(() => console.log('Opps cannot save ERROR!!!!'))
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(morgan('tiny'));
+app.use('/api', routes);
+
 
 
 app.listen(8080, () => {
