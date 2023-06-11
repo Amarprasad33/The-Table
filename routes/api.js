@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Food = require('../models/foods');
 
+// Home page
 router.get('/', (req, res) => {
 
     Food.find({ })
@@ -19,6 +20,7 @@ router.get('/', (req, res) => {
         });
 })
 
+// New food - Post req
 router.post('/', async (req, res) => {
     // console.log(req.body);
     const newFood = new Food({
@@ -29,7 +31,16 @@ router.post('/', async (req, res) => {
         description: req.body.description,
         image: req.body.image,
     });
+    const savedFood = await newFood.save();
+    console.log('New data saved')
+    res.status(201).send(savedFood)
 })
+
+
+
+
+
+
 
 
 
