@@ -1,4 +1,4 @@
-import {  Button,Card,CardActions,CardContent,Grid,Typography, } from "@mui/material";
+import {  Button,Card,CardActions,CardContent,CardMedia,Grid,Typography, } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -21,7 +21,7 @@ const ListFoods = () => {
         "image": "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       };
       const { data } = await axios.post("http://localhost:8080/api", postData);
-      setFoods(data);
+    
     }
   
     useEffect(() => {
@@ -40,6 +40,12 @@ const ListFoods = () => {
               {foods.map((Food) => (
                 <Grid item xs={4} key={Food._id}>
                   <Card>
+                     <CardMedia
+                        component="img"
+                        height="194"
+                        image={Food.image}
+                        alt="Paella dish"
+                     />
                     <CardContent>
                     <Typography
                         sx={{ fontSize: 14 }}
@@ -57,7 +63,7 @@ const ListFoods = () => {
                       <Typography variant="body2">{Food._id}</Typography>
                     </CardContent>
                     <CardActions>
-                    <Button component={Link} to={`/admin/detail/${Food.id}`}>View Details</Button>
+                    <Button component={Link} to={`/admin/detail/${Food._id}`}>View Details</Button>
                     </CardActions>
                   </Card>
                 </Grid>
